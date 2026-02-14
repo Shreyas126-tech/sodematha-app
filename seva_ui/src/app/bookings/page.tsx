@@ -71,7 +71,7 @@ export default function BookingsPage() {
             setBookings([...localRooms, ...apiBookings]);
 
         } catch (error) {
-            console.error("Failed to fetch bookings", error);
+            // console.error("Failed to fetch bookings", error);
             toast.error("Could not load bookings. Please try again later.");
         } finally {
             setLoading(false);
