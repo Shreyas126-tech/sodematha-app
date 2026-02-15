@@ -30,7 +30,13 @@ export function VoiceAssistant() {
             recog.onerror = (event: any) => {
                 console.error("Speech recognition error", event.error);
                 setIsListening(false);
-                toast.error("Voice error: " + (event.error || "Unknown"));
+                if (event.error === "not-allowed") {
+                    toast.error("Microphone access denied. Please enable it in your browser settings to use voice features.");
+                } else if (event.error === "no-speech") {
+                    // Silence usually happens if user doesn't say anything, just reset
+                } else {
+                    toast.error("Voice error: " + (event.error || "Unknown"));
+                }
             };
 
             recog.onend = () => {
